@@ -34,30 +34,30 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState){
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         final MainViewModel vm = new ViewModelProvider(this).get(MainViewModel.class);
-
-        bottomNavigationView = bottomNavigationView.findViewById(R.id.btNav);
-        bottomNavigationView.setOnApplyWindowInsetsListener(new NavigationBarView.OnItemSelectedListener() {
+        bottomNavigationView = findViewById(R.id.btNav);
+        bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                vm.setNavigationOpSelected(item.getItemId()) {
+                vm.setNavigationOpSelected(item.getItemId());
+                switch (item.getItemId()) {
                     case R.id.gridViewOp:
                         GridViewFragment gridViewFragment = GridViewFragment.newInstance();
                         setFragment(gridViewFragment);
                         break;
-                    case R.id.ListViewOp:
+                    case R.id.listViewOp:
                         ListViewFragment listViewFragment = ListViewFragment.newInstance();
-                        setFragment(ListViewFragment);
+                        setFragment(listViewFragment);
                         break;
                 }
                 return true;
             }
-        });
 
+        });
     }
     protected void onResume(){
         super.onResume();
